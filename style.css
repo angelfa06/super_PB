@@ -1,0 +1,213 @@
+/* ======== ESTILO BASE ======== */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+    max-width: 700px;
+    margin: auto;
+    color: #ffffff;
+}
+
+/* ======== TARJETAS ======== */
+.card {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    position: relative;
+    animation: fade .25s ease;
+}
+
+/* ======== VIDEO ======== */
+video {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.25);
+}
+
+/* ======== ALERTA ======== */
+#alerta {
+    display: none;
+    padding: 12px;
+    background: #d50000;
+    color: #fff;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* ======== LISTA ======== */
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ececec;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    animation: fade .25s ease;
+    font-size: 15px;
+}
+
+/* Botón eliminar dentro de li */
+button.delete {
+    background: #d32f2f;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+button.delete:hover {
+    background: #b71c1c;
+}
+
+/* ======== INPUTS & BOTONES ======== */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #1e88e5;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .25s;
+}
+
+button:hover {
+    background: #156fbd;
+}
+
+button.danger {
+    background: #c62828;
+}
+
+button.danger:hover {
+    background: #a01515;
+}
+
+/* ======== ANIMACIÓN ======== */
+@keyframes fade {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======== CAJA OCR ======== */
+#ocrBox {
+    position: absolute;
+    border: 3px solid #00ff55;
+    width: 60%;
+    height: 25%;
+    left: 50%;
+    top: 35%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,255,100,0.4);
+}
+
+/* ======== MODAL ======== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 20px;
+    width: 80%;
+    max-width: 350px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+/* ======== NAVBAR PRO ======== */
+.navbar {
+    width: 100%;
+    background: #1a1a1a;
+    padding: 14px 22px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+.nav-title {
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.nav-right a {
+    color: #dcdcdc;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: .25s;
+}
+
+.nav-right a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ======== MODO OSCURO ======== */
+@media (prefers-color-scheme: dark) {
+    
+    body {
+        background: #0d0d0d;
+        color: #f0f0f0;
+    }
+
+    .card {
+        background: #1b1b1b;
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(255,255,255,0.05);
+    }
+
+    li {
+        background: #2b2b2b;
+    }
+
+    input {
+        background: #1b1b1b;
+        color: white;
+        border: 1px solid #444;
+    }
+
+    .modal-content {
+        background: #1e1e1e;
+        color: white;
+    }
+
+    .navbar {
+        background: #111;
+    }
+}

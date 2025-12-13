@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="lista.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">Inicio</a>
+        <a href="lista.html">Lista de compras</a>
+    </nav>
+
+    <div class="container">
+        <h1>Lista de Compras</h1>
+
+        <div class="inputs">
+            <input id="item" type="text" placeholder="Agregar producto...">
+            <button onclick="agregarItem()">+</button>
+        </div>
+
+        <ul id="listaCompras"></ul>
+
+        <h2 class="titulo-comprados">Productos Comprados</h2>
+
+        <button class="btn-borrar-todo" onclick="borrarTodosComprados()">Borrar todos los comprados</button>
+
+        <ul id="listaComprados"></ul>
+    </div>
+
+    <script src="lista.js"></script>
+</body>
+</html>

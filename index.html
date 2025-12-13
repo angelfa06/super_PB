@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrador de Compras</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+    <meta name="theme-color" content="#2196f3">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <span class="nav-title">Compras OCR</span>
+    </div>
+    <div class="nav-right">
+        <a href="index.html">Inicio</a>
+        <a href="lista.html">Lista de compras</a>
+    </div>
+</nav>
+
+
+<h2>Administrador de Compras con Presupuesto + OCR</h2>
+
+
+<!-- PRESUPUESTO -->
+<div class="card">
+    <label>Presupuesto:</label>
+    <input type="number" id="presupuesto" placeholder="Ej: 20000">
+    <button onclick="setPresupuesto()">Guardar Presupuesto</button>
+</div>
+
+
+<!-- OCR EN VIVO -->
+<div class="card">
+    <h3>Cargar Precio en Vivo</h3>
+
+    <video id="video" autoplay playsinline></video>
+    <div id="ocrBox"></div>
+
+    <!-- BOTÓN PARA CAPTURAR IMAGEN DEL VIDEO -->
+    <button id="btnCapturar" style="margin-top: 10px;">Capturar Imagen</button>
+
+    <!-- BOTÓN PARA CONFIRMAR PRECIO OCR -->
+    <button id="btnOcrConfirm" style="display:none; margin-top:10px;">
+        Agregar Precio Detectado
+    </button>
+
+    <p id="ocrEstado">Apuntá la cámara a un precio...</p>
+</div>
+
+
+<!-- AGREGAR PRODUCTO MANUAL -->
+<div class="card">
+    <h3>Agregar Producto Manual</h3>
+    <input id="nombre" placeholder="Nombre del producto">
+    <input id="precio" type="number" placeholder="Precio">
+    <button onclick="agregarProductoManual()">Agregar</button>
+</div>
+
+
+<!-- LISTA -->
+<div class="card">
+    <h3>Lista de Compras</h3>
+    <ul id="lista"></ul>
+
+    <p><strong>Total gastado:</strong> $<span id="total">0</span></p>
+    <p><strong>Restante:</strong> $<span id="restante">0</span></p>
+
+    <div id="alerta">⚠️ ¡Has llegado al presupuesto!</div>
+
+    <button id="reset" class="danger" onclick="resetear()">Reiniciar Todo</button>
+</div>
+
+
+<!-- MODAL EDITAR -->
+<div id="modalEditar" class="modal">
+    <div class="modal-content">
+        <h3>Editar Producto</h3>
+
+        <label>Nombre:</label>
+        <input id="editNombre">
+
+        <label>Precio:</label>
+        <input id="editPrecio" type="number">
+
+        <button id="btnGuardarEdicion">Guardar Cambios</button>
+        <button id="btnCerrarModal" class="danger">Cancelar</button>
+    </div>
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log("Service Worker registrado ✔️"))
+    .catch(err => console.log("Error registrando SW:", err));
+}
+</script>
+
+</body>
+</html>
