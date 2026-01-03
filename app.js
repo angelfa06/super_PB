@@ -15,6 +15,7 @@ const editPrecio = document.getElementById("editPrecio");
 const btnGuardarEdicion = document.getElementById("btnGuardarEdicion");
 const btnCerrarModal = document.getElementById("btnCerrarModal");
 
+
 // ------------------ GUARDAR / CARGAR ------------------
 
 function guardarEstado() {
@@ -228,43 +229,100 @@ async function escanear() {
 
 // ------------------ BOTÓN CAPTURAR IMAGEN ------------------
 
-document.getElementById("btnCapturar").onclick = async () => {
-    const w = video.videoWidth * 0.6;
-    const h = video.videoHeight * 0.25;
-    const x = (video.videoWidth - w) / 2;
-    const y = (video.videoHeight - h) / 2;
+btnCapturar.addEventListener("click", async () => {
 
-    canvas.width = w;
-    canvas.height = h;
+    if (!video.videoWidth) {
+        estado.textContent = "La cámara no está lista";
+        return;
+    }
 
-    ctx.drawImage(video, x, y, w, h, 0, 0, w, h);
-
-    const imagen = canvas.toDataURL("image/png");
-
-    estado.textContent = "Capturando...";
+    // ⬇️ ESTADO PROCESANDO (ACÁ VA)
+    btnCapturar.classList.add("loading");
+    btnCapturar.querySelector(".btn-text").textContent = "Procesando...";
+    btnCapturar.disabled = true;
 
     try {
-        const result = await Tesseract.recognize(imagen, "spa");
-        const data = result.data.text;
-        const numeros = data.match(/\$?\s?\d+[.,]?\d*/g);
+        const w = video.videoWidth * 0.6;
+        const h = video.videoHeight * 0.25;
+        const x = (video.videoWidth - w) / 2;
+        const y = (video.videoHeight - h) / 2;
 
-        if (numeros && numeros.length > 0) {
-            const precio = parseFloat(numeros[numeros.length - 1].replace(",", "."));
-            if (!isNaN(precio)) {
-                estado.textContent = "Precio detectado: $" + precio;
-                agregarProducto("Producto (OCR)", precio);
-            }
-        } else {
-            estado.textContent = "No se detectó número";
+        canvas.width = w;
+        canvas.height = h;
+        ctx.drawImage(video, x, y, w, h, 0, 0, w, h);
+
+        estado.textContent = "Procesando imagen...";
+
+        const result = await Tesseract.recognize(canvas, "spa");
+
+        ; const texto = result.data.text;
+        const precio = extraerPrecioArgentina(texto);
+
+        if (!precio) {
+            estado.textContent = "No se detectó un precio válido";
+            return;
         }
 
-    } catch (e) {
-        estado.textContent = "Error al procesar la imagen";
+
+        if (isNaN(precio)) {
+            estado.textContent = "Precio inválido";
+            return;
+        }
+
+        estado.textContent = "Precio detectado: $" + precio;
+        agregarProducto("Producto (OCR)", precio);
+
+    } catch (err) {
+        console.error(err);
+        estado.textContent = "Error al leer la imagen";
+    } finally {
+        // ⬇️ VOLVER A ESTADO NORMAL (ACÁ TAMBIÉN)
+        btnCapturar.classList.remove("loading");
+        btnCapturar.querySelector(".btn-text").textContent = "Capturar";
+        btnCapturar.disabled = false;
     }
-};
+});
+
+function extraerPrecioArgentina(texto) {
+    // Buscar números con formato argentino
+    const matches = texto.match(/\$?\s?\d{1,3}(\.\d{3})*(,\d{2})?/g);
+    if (!matches) return null;
+
+    const precios = matches
+        .map(p => p.replace(/\$/g, "").trim())
+        .map(p => {
+            // 1.234,56 → 1234.56
+            if (p.includes(",") && p.includes(".")) {
+                return parseFloat(p.replace(/\./g, "").replace(",", "."));
+            }
+            // 1234,56 → 1234.56
+            if (p.includes(",")) {
+                return parseFloat(p.replace(",", "."));
+            }
+            // 1.234 → 1234
+            if (p.includes(".")) {
+                return parseFloat(p.replace(/\./g, ""));
+            }
+            return parseFloat(p);
+        })
+        .filter(p => !isNaN(p) && p > 10); // descartamos precios chicos
+
+    if (precios.length === 0) return null;
+
+    // devolver el precio más alto (suele ser el total)
+    return Math.max(...precios);
+}
 
 
-video.addEventListener("loadeddata", escanear);
+
+
+
+//video.addEventListener("loadeddata", escanear);
+
+
+
+
+
 
 
 
