@@ -210,4 +210,244 @@ button.danger:hover {
     .navbar {
         background: #111;
     }
+
+    @media (prefers-color-scheme: dark) {
+    body {
+        background: #0f0f10;
+        color: #f3f3f3;
+    }
+
+    .card {
+        background: #1a1a1c;
+    }
+
+    h2, h3 {
+        color: #fff;
+    }
 }
+
+}
+
+
+
+/* ======== VISOR DE CÁMARA PRO ======== */
+
+.camera-container {
+    position: relative;
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Video */
+.camera-container video {
+    width: 100%;
+    display: block;
+}
+
+/* Oscurecer fondo */
+.camera-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    pointer-events: none;
+}
+
+/* Marco OCR */
+#ocrBox {
+    position: absolute;
+    width: 70%;
+    height: 26%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,255,140,0.6);
+    background: transparent;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Línea animada */
+.scan-line {
+    position: absolute;
+    left: 5%;
+    width: 90%;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #00ff88,
+        transparent
+    );
+    animation: scan 2.2s infinite ease-in-out;
+}
+
+@keyframes scan {
+    0% { top: 10%; opacity: 0.2; }
+    50% { top: 85%; opacity: 1; }
+    100% { top: 10%; opacity: 0.2; }
+}
+
+
+/* ======== BOTÓN CAPTURA PRO ======== */
+
+.btn-capture {
+    margin-top: 16px;
+    width: 100%;
+    height: 64px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #00c853, #00e676);
+    color: #003b1f;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    box-shadow: 0 8px 20px rgba(0, 230, 118, 0.4);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.btn-capture:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 26px rgba(0, 230, 118, 0.6);
+}
+
+.btn-capture:active {
+    transform: scale(0.96);
+}
+
+.btn-capture:disabled {
+    background: #888;
+    color: #eee;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Icono */
+.camera-icon {
+    font-size: 26px;
+}
+
+/* Estado procesando */
+.btn-capture.loading {
+    background: linear-gradient(135deg, #555, #777);
+    color: #fff;
+}
+
+
+
+/* ======== PREVIEW IMAGEN ======== */
+
+.preview {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 14px;
+    background: #111;
+    text-align: center;
+    animation: fade .25s ease;
+}
+
+.preview img {
+    width: 100%;
+    max-height: 260px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+
+.preview p {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+/* oculto */
+.hidden {
+    display: none;
+}
+
+/* ======== ESTÉTICA APP MÓVIL ======== */
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f3f4f6;
+    padding: 16px;
+    max-width: 480px;
+    margin: auto;
+    color: #111;
+}
+
+/* Títulos */
+h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 16px 4px;
+}
+
+h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Tarjetas */
+.card {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Inputs */
+input {
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 14px;
+}
+
+/* Botones */
+button {
+    font-size: 17px;
+    border-radius: 16px;
+}
+
+/* Lista de productos */
+li {
+    border-radius: 14px;
+    font-size: 15px;
+}
+
+/* Total y restante */
+#total,
+#restante {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+/* Navbar */
+.navbar {
+    border-radius: 18px;
+    padding: 16px 20px;
+}
+
+.nav-title {
+    font-size: 18px;
+}
+
+/* Separación entre cards */
+.card + .card {
+    margin-top: 18px;
+}
+
+        background: #111;
+    }
+}
+
