@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="icons/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
@@ -27,7 +29,7 @@
 </nav>
 
 
-<h2>Administrador de Compras con Presupuesto + OCR</h2>
+
 
 
 <!-- PRESUPUESTO -->
@@ -42,11 +44,25 @@
 <div class="card">
     <h3>Cargar Precio en Vivo</h3>
 
+    <div class="camera-container">
     <video id="video" autoplay playsinline></video>
-    <div id="ocrBox"></div>
+
+    <!-- Oscurecimiento -->
+    <div class="camera-overlay"></div>
+
+    <!-- Marco OCR -->
+    <div id="ocrBox">
+        <span class="scan-line"></span>
+    </div>
+</div>
+
 
     <!-- BOTÓN PARA CAPTURAR IMAGEN DEL VIDEO -->
-    <button id="btnCapturar" style="margin-top: 10px;">Capturar Imagen</button>
+    <button id="btnCapturar" class="btn-capture">
+        <span class="camera-icon">📷</span>
+    <span class="btn-text">Capturar</span>
+</button>
+
 
     <!-- BOTÓN PARA CONFIRMAR PRECIO OCR -->
     <button id="btnOcrConfirm" style="display:none; margin-top:10px;">
@@ -109,3 +125,8 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
+
+</body>
+</html>
+
